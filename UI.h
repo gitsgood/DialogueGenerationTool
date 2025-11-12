@@ -4,7 +4,6 @@
 #define UI_H
 
 #include "Core.h"
-#include "DialogueContent.h"
 
 class UserInterface
 {
@@ -21,6 +20,8 @@ public:
 	int Monitor;
 	int WindowWidth;
 	int WindowLength;
+
+	State CurrentState;
 
 	UserInterface();
 

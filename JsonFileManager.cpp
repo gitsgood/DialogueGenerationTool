@@ -72,3 +72,25 @@ std::string JsonFileManager::GenerateTheFinalJsonString()
 
     return FinalJsonString.str();
 }
+
+std::string JsonFileManager::ParserForJson(const std::string& inStringToParse)
+{
+    std::string ParsedString;
+
+    for (const char& VectorLetter : inStringToParse)
+    {
+        switch (VectorLetter)
+        {
+        case '"':
+        case '\\':
+            ParsedString += '\\';
+            ParsedString += VectorLetter;
+            break;
+        default:
+            ParsedString += VectorLetter;
+            break;
+        }
+    }
+
+    return ParsedString;
+}

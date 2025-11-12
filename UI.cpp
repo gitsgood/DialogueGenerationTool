@@ -18,15 +18,33 @@ UserInterface::UserInterface()
 	PointOfView.rotation = 0.f;
 	PointOfView.zoom = 2.f;
 
+	CurrentState = Input;
 }
 
 void UserInterface::ViewControls()
 {
 	// Panning with Middle Mouse Button
-	if (IsMouseButtonDown(MOUSE_BUTTON_MIDDLE)) {
+	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) 
+	{
 		Vector2 delta = GetMouseDelta();
 		delta = Vector2Scale(delta, -1.0f / PointOfView.zoom); // Scale by zoom level
 		PointOfView.target = Vector2Add(PointOfView.target, delta);
+	}
+
+	// Change the state
+	if (IsKeyPressed(KEY_S))
+	{
+		switch (CurrentState)
+		{
+		case(0):
+			CurrentState = VisualiseTree;
+			break;
+		case(1):
+			CurrentState = Input;
+			break;
+		default:
+			break;
+		}
 	}
 
 	// Zooming to the Mouse Cursor

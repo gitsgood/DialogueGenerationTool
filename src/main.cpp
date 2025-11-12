@@ -1,41 +1,57 @@
 #include "Core.h"
-#include "JsonFileManager.h"
+#include "JsonFileManager.h"	// Also includes DialogueContent.h
 #include "UI.h"
 
 
 int main()
 {
-    UserInterface UserView;
+	UserInterface UserView;
 
-    const char* WindowName { "Name Of Your Window" };
-    const char* HelloMessage{ "Hello World!" };
+	const char* WindowName{ "Name Of Your Window" };
+	const char* HelloMessage{ "Hello World!" };
 
-    const int TextFontSize{ 25 };
+	const char* VisualiserMessage{ "Your tree goes here" };
 
-    Vector2 MiddleOfScreenPrintTarget = 
-    {
-        (UserView.PointOfView.target.x -MeasureText(HelloMessage, TextFontSize))/2,
-        (UserView.PointOfView.target.y -TextFontSize)/2
-    };
+	const int TextFontSize{ 25 };
 
-    SetTargetFPS(60);
+	Vector2 VisualiserMiddleOfScreenPrintTarget =
+	{
+		UserView.PointOfView.target.x - (MeasureText(VisualiserMessage, TextFontSize) / 2),
+		UserView.PointOfView.target.y - (TextFontSize / 2)
+	};
 
-    while (!WindowShouldClose()) {
+	Vector2 InputMiddleOfScreenPrintTarget =
+	{
+		(GetScreenWidth() - MeasureText(HelloMessage, TextFontSize)) / 2,
+		(GetScreenHeight() - TextFontSize) / 2
+	};
 
-        UserView.ViewControls();
+	SetTargetFPS(60);
 
-        BeginDrawing();
-        BeginMode2D(UserView.PointOfView);
-        {
-            ClearBackground(RED);
+	while (!WindowShouldClose()) {
 
+		UserView.ViewControls();
 
+		BeginDrawing();
+		switch (UserView.CurrentState)
+		{
+		case(0):
+			ClearBackground(RED);
+			DrawText(HelloMessage, int(InputMiddleOfScreenPrintTarget.x), int(InputMiddleOfScreenPrintTarget.y), TextFontSize, BLACK);
+			break;
+		case(1):
+			BeginMode2D(UserView.PointOfView);
+			{
+				ClearBackground(BLACK);
+				DrawText(VisualiserMessage, int(VisualiserMiddleOfScreenPrintTarget.x), int(VisualiserMiddleOfScreenPrintTarget.y), TextFontSize, YELLOW);
+			}
+			EndMode2D();
+			break;
+		default:
+			break;
+		}
+		EndDrawing();
+	}
 
-            DrawText(HelloMessage, int(MiddleOfScreenPrintTarget.x), int(MiddleOfScreenPrintTarget.y), TextFontSize, BLACK);
-        }
-        EndMode2D();
-        EndDrawing();
-    }
-
-    CloseWindow();
+	CloseWindow();
 }

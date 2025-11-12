@@ -7,15 +7,6 @@
 
 struct DialogueParent
 {
-	/**
-	* @brief Makes sure the input string doesn't hold any characters that mess with JSON formatting.
-	*
-	* @param[in] inStringToParse The string that needs double checking.
-	*
-	* @return A string with any singular " or \ characters preceded with a backslash( \ ).
-	*/
-	std::string ParserForJson(const std::string& inStringToParse) const;
-
 	virtual std::string StringifyForJson() const = 0;
 };
 

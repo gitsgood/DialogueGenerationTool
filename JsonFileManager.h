@@ -32,14 +32,25 @@ public:
 
 	/**
 	* @brief Will put together a string that is fully JSON formatted.
-	* 
+	*
 	* @see WriteTheDialogueJson for where this gets called.
-	* 
+	*
 	* @return Formatted JSON string container the full amount of information gathered by this tool.
 	*/
 	static std::string GenerateTheFinalJsonString();
 
-	static const DialogueEdge& GetDialogueEdge(int inVectorIndex) { return DialogueEdgeContainer[inVectorIndex]; } 
+	/**
+	* @brief Makes sure the input string doesn't hold any characters that mess with JSON formatting.
+	*
+	* @see DialogueParent::StringifyForJson and its implementations for info on how this gets called.
+	* 
+	* @param[in] inStringToParse The string that needs double checking.
+	*
+	* @return A string with any singular " or \ characters preceded with a backslash( \ ).
+	*/
+	static std::string ParserForJson(const std::string& inStringToParse);
+
+	static const DialogueEdge& GetDialogueEdge(int inVectorIndex) { return DialogueEdgeContainer[inVectorIndex]; }
 	static const DialogueNode& GetDialogueNode(int inVectorIndex) { return DialogueNodeContainer[inVectorIndex]; }
 };
 
