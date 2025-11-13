@@ -96,4 +96,9 @@ void UserInterface::InputControls()
 			break;
 		}
 	}
+
+	if (IsKeyPressed)
+	{
+		GetKeyPressed();
+	}
 }

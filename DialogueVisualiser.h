@@ -30,17 +30,12 @@ private:
     std::unordered_map<std::string, std::string> wrappedText;
 
     // --- Constants for Layout and Drawing ---
-    //const float NODE_WIDTH = 250.0f;
-    //const float NODE_HEIGHT = 80.0f;
-    //const float EDGE_WIDTH = 200.0f;
-    //const float EDGE_HEIGHT = 60.0f;
-    const float MIN_NODE_WIDTH = 200.0f;
-    const float MAX_NODE_WIDTH = 350.0f;
-    const float VERTICAL_SPACING = 50.0f;
-    const float HORIZONTAL_SPACING = 40.0f;
-    const int TEXT_FONT_SIZE = 16;
+    const float MAX_NODE_WIDTH = 350.0f; // The key control variable!
     const int TEXT_PADDING = 10;
-    const int LINE_SPACING = 5;
+    const int TEXT_FONT_SIZE = 16;
+    const int LINE_SPACING = 4; // Vertical space between wrapped lines
+    const float HORIZONTAL_SPACING = 40.0f;
+    const float VERTICAL_SPACING = 50.0f;
 
     // --- Private Helper Methods ---
     void CalculateLayout();
@@ -49,6 +44,15 @@ private:
 
     void LayoutElementRecursive(const std::string& elementId, Vector2 position, std::unordered_map<std::string, bool>& visited);
 
+    /**
+    * @brief Recursively draws the dialogue tree elements and their connections.
+    *
+    * This function uses the pre-calculated data from the layout phase (layoutRects, wrappedText)
+    * to perform the actual drawing operations.
+    *
+    * @param elementId The ID of the node or edge to start drawing from.
+    * @param visited A map to track which elements have already been drawn this frame to prevent cycles.
+    */
     void DrawRecursive(const std::string& elementId, std::unordered_map<std::string, bool>& visited);
 
 };
