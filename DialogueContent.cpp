@@ -36,3 +36,18 @@ std::string DialogueEdge::StringifyForJson() const
 
 	return JsonEdgeObject.str();
 }
+
+void DialogueTree::PopulateMaps()
+{
+	auto PopulateLamda = []<typename T>(std::vector<T> V, std::unordered_map<std::string, T> M)
+	{
+		for (const T& Member : V)
+		{
+			M.try_emplace(Member.GetId(), Member);
+		}
+	};
+
+	PopulateLamda(DialogueEdgeContainer, EdgeMap);
+
+	PopulateLamda(DialogueNodeContainer, NodeMap);
+}

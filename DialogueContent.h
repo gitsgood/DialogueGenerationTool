@@ -8,6 +8,7 @@
 struct DialogueParent
 {
 	virtual std::string StringifyForJson() const = 0;
+	virtual std::string GetId() const = 0;
 };
 
 struct DialogueNode : public DialogueParent
@@ -24,6 +25,8 @@ struct DialogueNode : public DialogueParent
 	};
 
 	virtual std::string StringifyForJson() const override;
+
+	virtual std::string GetId() const override { return NodeId; };
 };
 
 struct DialogueEdge : public DialogueParent
@@ -40,6 +43,21 @@ struct DialogueEdge : public DialogueParent
 	};
 
 	virtual std::string StringifyForJson() const override;
+
+	virtual std::string GetId() const override { return EdgeId; };
+};
+
+struct DialogueTree
+{
+	inline static std::string NPCId{ "Tommy Wiseau" };
+
+	inline static std::vector<DialogueEdge> DialogueEdgeContainer;
+	inline static std::vector<DialogueNode> DialogueNodeContainer;
+
+	inline static std::unordered_map<std::string, DialogueEdge> EdgeMap;
+	inline static std::unordered_map<std::string, DialogueNode> NodeMap;
+
+	static void PopulateMaps();
 };
 
 #endif // !DIALOGUECONTENT_H

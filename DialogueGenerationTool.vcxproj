@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DialogueContent.cpp" />
+    <ClCompile Include="DialogueVisualiser.cpp" />
     <ClCompile Include="JsonFileManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="UI.cpp" />

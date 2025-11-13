@@ -15,11 +15,6 @@ public:
 	inline static std::filesystem::path DestinationPath{ "" };
 	inline static std::string JsonFileName{ "DialogueFile" };
 
-	inline static std::string NPCId{ "Tommy Wiseau" };
-
-	inline static std::vector<DialogueEdge> DialogueEdgeContainer;
-	inline static std::vector<DialogueNode> DialogueNodeContainer;
-
 	/**
 	* @brief Will try to find the specific directory for which this tool was designed for.
 	*/
@@ -49,9 +44,6 @@ public:
 	* @return A string with any singular " or \ characters preceded with a backslash( \ ).
 	*/
 	static std::string ParserForJson(const std::string& inStringToParse);
-
-	static const DialogueEdge& GetDialogueEdge(int inVectorIndex) { return DialogueEdgeContainer[inVectorIndex]; }
-	static const DialogueNode& GetDialogueNode(int inVectorIndex) { return DialogueNodeContainer[inVectorIndex]; }
 };
 
 #endif // !JSONFILEMANAGER_H

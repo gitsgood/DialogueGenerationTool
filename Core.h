@@ -9,6 +9,8 @@
 #include <sstream>
 #include <filesystem>
 #include <vector>
+#include <unordered_map>
+#include <algorithm> // For std::max
 
 #include "raylib.h"
 #include "raymath.h"

@@ -37,11 +37,12 @@ std::string JsonFileManager::GenerateTheFinalJsonString()
     std::ostringstream FinalJsonString;
     FinalJsonString
         << "{\n"
-        << "\t\"NPCId\": \"" << NPCId << "\",\n"
+        << "\t\"NPCId\": \"" << DialogueTree::NPCId << "\",\n"
         << "\t\"Nodes\": \n"
         << "\t[\n";
 
-    auto StringifyContainer = [&FinalJsonString]<typename T>(const std::vector<T>&V) {
+    auto StringifyContainer = [&FinalJsonString]<typename T>(const std::vector<T>&V) 
+    {
         size_t Size{ V.size() };
         for (size_t i = 0; i < Size; i++)
         {
@@ -57,14 +58,14 @@ std::string JsonFileManager::GenerateTheFinalJsonString()
         }
     };
 
-    StringifyContainer(DialogueNodeContainer);
+    StringifyContainer(DialogueTree::DialogueNodeContainer);
 
     FinalJsonString
         << "\t],\n"
         << "\t\"Edges\":\n"
         << "\t[\n";
 
-    StringifyContainer(DialogueEdgeContainer);
+    StringifyContainer(DialogueTree::DialogueEdgeContainer);
 
     FinalJsonString
         << "\t]\n"

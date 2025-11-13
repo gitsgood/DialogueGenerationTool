@@ -1,6 +1,6 @@
 #include "UI.h"
 
-UserInterface::UserInterface()
+void UserInterface::GetScreenInfo()
 {
 	InitWindow(1, 1, "This window exists for the sole purpose of succesfully getting monitor size info.");
 
@@ -9,14 +9,24 @@ UserInterface::UserInterface()
 	WindowLength = GetMonitorHeight(Monitor) / 2;
 
 	CloseWindow(); // We close the temporary one. What comes after is what matters.
+}
 
-	InitWindow(WindowWidth, WindowLength, "WindowName");
-
+void UserInterface::TreeVisualiserCameraSetUp()
+{
 	PointOfView = { 0 };
 	PointOfView.offset = { float(WindowWidth / 2), float(WindowLength / 2) };
 	PointOfView.target = { 0.f ,0.f };
 	PointOfView.rotation = 0.f;
 	PointOfView.zoom = 2.f;
+}
+
+UserInterface::UserInterface()
+{
+	GetScreenInfo();
+
+	InitWindow(WindowWidth, WindowLength, WindowName);
+
+	TreeVisualiserCameraSetUp();
 
 	CurrentState = Input;
 }
@@ -67,4 +77,23 @@ void UserInterface::ViewControls()
 	if (PointOfView.zoom < 0.25f) PointOfView.zoom = 0.25f;
 	if (PointOfView.zoom > 5.0f) PointOfView.zoom = 5.0f;
 	PointOfView.zoom = Clamp(PointOfView.zoom, 0.25f, 5.0f);
+}
+
+void UserInterface::InputControls()
+{
+	// Change the state
+	if (IsKeyPressed(KEY_S))
+	{
+		switch (CurrentState)
+		{
+		case(0):
+			CurrentState = VisualiseTree;
+			break;
+		case(1):
+			CurrentState = Input;
+			break;
+		default:
+			break;
+		}
+	}
 }
