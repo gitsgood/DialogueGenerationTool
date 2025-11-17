@@ -20,7 +20,7 @@ void JsonFileManager::FindTargetDirectory()
     }
 }
 
-void JsonFileManager::WriteTheDialogueJson()
+void JsonFileManager::WriteTheDialogueJsonFile()
 {
     std::string FileName = JsonFileName + ".json";
     DestinationPath /= FileName;

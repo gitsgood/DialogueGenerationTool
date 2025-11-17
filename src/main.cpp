@@ -2,6 +2,7 @@
 #include "JsonFileManager.h"	// Also includes DialogueContent.h
 #include "UI.h"
 #include "DialogueVisualiser.h"
+#include "InputManager.h"
 
 // --- Helper function to create some test data ---
 void CreateTestData(DialogueTree& tree) {
@@ -22,53 +23,101 @@ void CreateTestData(DialogueTree& tree) {
 	tree.EdgeMap.emplace("Edge_FuckYou2", DialogueEdge("Edge_FuckYou2", "*clench your fist*", ""));
 }
 
+//int main()
+//{
+//	UserInterface UI;
+//
+//	// Create and populate our data
+//	DialogueTree myTree;
+//	CreateTestData(myTree);
+//
+//	// Create the editor, which will automatically calculate the layout
+//	DialogueVisualiser visualiser(myTree);
+//
+//	const char* HelloMessage{ "Hello World!" };
+//
+//	const int TextFontSize{ 25 };
+//
+//	Vector2 InputMiddleOfScreenPrintTarget =
+//	{
+//		(GetScreenWidth() - MeasureText(HelloMessage, TextFontSize)) / 2,
+//		(GetScreenHeight() - TextFontSize) / 2
+//	};
+//
+//	SetTargetFPS(60);
+//
+//	while (!WindowShouldClose()) {
+//
+//		BeginDrawing();
+//		switch (UI.CurrentState)
+//		{
+//		case(0):
+//			UI.InputControls();
+//			ClearBackground(RED);
+//			DrawText(HelloMessage, int(InputMiddleOfScreenPrintTarget.x), int(InputMiddleOfScreenPrintTarget.y), TextFontSize, BLACK);
+//			break;
+//		case(1):
+//			UI.ViewControls();
+//			BeginMode2D(UI.PointOfView);
+//			{
+//				visualiser.Draw();   // Draw the tree
+//			}
+//			EndMode2D();
+//			break;
+//		default:
+//			break;
+//		}
+//		EndDrawing();
+//	}
+//
+//	CloseWindow();
+//}
+
+
 int main()
 {
-	UserInterface UserView;
+	UserInterface UI;
 
-	// Create and populate our data
 	DialogueTree myTree;
 	CreateTestData(myTree);
+	myTree.PopulateMaps();
 
-	// Create the editor, which will automatically calculate the layout
 	DialogueVisualiser visualiser(myTree);
+	InputManager inputManager(myTree);
 
-	const char* HelloMessage{ "Hello World!" };
-
-	const int TextFontSize{ 25 };
-
-	Vector2 InputMiddleOfScreenPrintTarget =
-	{
-		(GetScreenWidth() - MeasureText(HelloMessage, TextFontSize)) / 2,
-		(GetScreenHeight() - TextFontSize) / 2
-	};
+	inputManager.SetVisualiser(&visualiser);
 
 	SetTargetFPS(60);
 
 	while (!WindowShouldClose()) {
+		// --- The Update Phase (No Drawing Yet) ---
+		if (UI.CurrentState == UserInterface::State::Input) {
+			UI.InputControls();
+			inputManager.Update();
+		}
+		else {
+			UI.ViewControls();
+		}
 
-		//UserView.ViewControls();
-
+		// --- The Drawing Phase ---
 		BeginDrawing();
-		switch (UserView.CurrentState)
-		{
-		case(0):
-			UserView.InputControls();
-			ClearBackground(RED);
-			DrawText(HelloMessage, int(InputMiddleOfScreenPrintTarget.x), int(InputMiddleOfScreenPrintTarget.y), TextFontSize, BLACK);
-			break;
-		case(1):
-			UserView.ViewControls();
-			BeginMode2D(UserView.PointOfView);
+
+		if (UI.CurrentState == UserInterface::State::Input) {
+			ClearBackground(DARKBLUE);
+			inputManager.Draw();
+		}
+		else { // State is VisualiseTree
+			ClearBackground(DARKGRAY);
+			BeginMode2D(UI.PointOfView);
 			{
-				//visualiser.Update(); // Handle camera
-				visualiser.Draw();   // Draw the tree
+				visualiser.Draw();
 			}
 			EndMode2D();
-			break;
-		default:
-			break;
 		}
+
+		// Draw a generic UI prompt on top of everything
+		DrawText("[S] to switch modes", 10, 10, 20, RAYWHITE);
+
 		EndDrawing();
 	}
 

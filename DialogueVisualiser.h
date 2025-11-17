@@ -13,6 +13,8 @@ public:
     DialogueVisualiser(DialogueTree& tree);
     void Draw();   // Draws the entire tree
 
+    void RebuildLayout();
+
 private:
     // --- Data ---
     DialogueTree& dialogueTree; // A reference to the data

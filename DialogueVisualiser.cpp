@@ -217,6 +217,18 @@ void DialogueVisualiser::Draw()
 	//EndDrawing();
 }
 
+// This is the new public method. Its job is simply to call the private method.
+void DialogueVisualiser::RebuildLayout() {
+	// We check if the root node exists before trying to build a layout from it.
+	if (dialogueTree.NodeMap.count("START")) {
+		CalculateLayout();
+	}
+	else {
+		// If there's no root node, the tree is empty. Clear the layout.
+		layoutRects.clear();
+	}
+}
+
 void DialogueVisualiser::DrawRecursive(const std::string& elementId, std::unordered_map<std::string, bool>& visited) 
 {
 	// Safety Guard: If we have already drawn this element, or if it has no layout, stop.

@@ -17,7 +17,7 @@ struct DialogueNode : public DialogueParent
 	std::string NPCDialogue;
 	std::vector<std::string> OutgoingEdgeIds;
 
-	DialogueNode(const std::string& newNPCDialogue, const std::vector<std::string>& newOutgoingEdgeIds, const std::string& newNodeId = "START") :
+	DialogueNode(const std::string& newNPCDialogue = "Hi there.", const std::vector<std::string>& newOutgoingEdgeIds = {"1"}, const std::string& newNodeId = "START") :
 		NodeId(newNodeId),
 		NPCDialogue(newNPCDialogue),
 		OutgoingEdgeIds(newOutgoingEdgeIds)

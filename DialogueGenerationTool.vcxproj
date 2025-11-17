@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="DialogueContent.cpp" />
     <ClCompile Include="DialogueVisualiser.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="JsonFileManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="DialogueContent.h" />
     <ClInclude Include="DialogueVisualiser.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="JsonFileManager.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

@@ -23,7 +23,7 @@ public:
 	/**
 	* @brief Opens a new file and inputs the contents gathered by this tool.
 	*/
-	static void WriteTheDialogueJson();
+	static void WriteTheDialogueJsonFile();
 
 	/**
 	* @brief Will put together a string that is fully JSON formatted.
