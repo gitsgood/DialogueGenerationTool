@@ -20,7 +20,7 @@ void JsonFileManager::FindTargetDirectory()
     }
 }
 
-void JsonFileManager::WriteTheDialogueJson()
+void JsonFileManager::CreateTheDialogueJsonFile()
 {
     std::string FileName = JsonFileName + ".json";
     DestinationPath /= FileName;
@@ -76,7 +76,7 @@ std::string JsonFileManager::GenerateTheFinalJsonString()
 
 std::string JsonFileManager::ParserForJson(const std::string& inStringToParse)
 {
-    std::string ParsedString;
+    std::string ParsedString{ "" };
 
     for (const char& VectorLetter : inStringToParse)
     {
@@ -94,4 +94,13 @@ std::string JsonFileManager::ParserForJson(const std::string& inStringToParse)
     }
 
     return ParsedString;
+}
+
+std::string JsonFileManager::BoolParserForJson(const bool inBoolToParse)
+{
+    std::string ParsedBool{ "" };
+
+    inBoolToParse ? ParsedBool = "true" : ParsedBool = "false";
+
+    return ParsedBool;
 }

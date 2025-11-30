@@ -9,7 +9,7 @@
 class DialogueVisualiser
 {
 public:
-    // --- Public Methods ---
+
     DialogueVisualiser(DialogueTree& tree);
     void Draw();   // Draws the entire tree
 
@@ -37,7 +37,6 @@ private:
     const float HORIZONTAL_SPACING = 40.0f;
     const float VERTICAL_SPACING = 50.0f;
 
-    // --- Private Helper Methods ---
     void CalculateLayout();
 
     float CalculateSubtreeWidthsRecursive(const std::string& elementId, std::unordered_map<std::string, bool>& visited);

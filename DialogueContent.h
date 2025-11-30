@@ -16,6 +16,10 @@ struct DialogueNode : public DialogueParent
 	std::string NodeId;
 	std::string NPCDialogue;
 	std::vector<std::string> OutgoingEdgeIds;
+	bool bIsConvinced{ false };
+	bool bIsAngered{ false };
+	bool bIsAntagonistic{ false };
+	bool bIsVillagerKilled{ false };
 
 	DialogueNode(const std::string& newNPCDialogue, const std::vector<std::string>& newOutgoingEdgeIds, const std::string& newNodeId = "START") :
 		NodeId(newNodeId),
@@ -34,6 +38,10 @@ struct DialogueEdge : public DialogueParent
 	std::string EdgeId;
 	std::string PlayerDialogue;
 	std::string NextNodeId;
+	bool bIsConvinced{ false };
+	bool bIsAngered{ false };
+	bool bIsAntagonistic{ false };
+	bool bIsVillagerKilled{ false };
 
 	DialogueEdge(const std::string& newEdgeId = "END", const std::string& newPlayerDialogue = "*end*", const std::string& newNextNodeId = "") :
 		EdgeId(newEdgeId),

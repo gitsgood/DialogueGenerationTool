@@ -5,7 +5,8 @@ std::string DialogueNode::StringifyForJson() const
 {
 	std::ostringstream JsonNodeObject;
 	JsonNodeObject
-		<< "\t\t{\n\t\t\t\"NodeId\": \"" << JsonFileManager::ParserForJson(NodeId) << "\",\n"
+		<< "\t\t{\n"
+		<< "\t\t\t\"NodeId\": \"" << JsonFileManager::ParserForJson(NodeId) << "\",\n"
 		<< "\t\t\t\"NPCDialogue\": \"" << JsonFileManager::ParserForJson(NPCDialogue) << "\",\n"
 		<< "\t\t\t\"OutgoingEdgeIds\": [";
 	{
@@ -20,7 +21,13 @@ std::string DialogueNode::StringifyForJson() const
 			}
 		}
 	}
-	JsonNodeObject << "]\n\t\t}";
+	JsonNodeObject
+		<< "]\n"
+		<< "\t\t\t\"bIsConvinced\": " << JsonFileManager::BoolParserForJson(bIsConvinced) << ",\n"
+		<< "\t\t\t\"bIsAngered\": " << JsonFileManager::BoolParserForJson(bIsAngered) << ",\n"
+		<< "\t\t\t\"bIsAntagonistic\": " << JsonFileManager::BoolParserForJson(bIsAntagonistic) << ",\n"
+		<< "\t\t\t\"bIsVillagerKilled\": " << JsonFileManager::BoolParserForJson(bIsVillagerKilled) << "\n"
+		<< "\t\t}";
 
 	return JsonNodeObject.str();
 }
@@ -29,10 +36,16 @@ std::string DialogueEdge::StringifyForJson() const
 {
 	std::ostringstream JsonEdgeObject;
 	JsonEdgeObject
-		<< "\t\t{\n\t\t\t\"EdgeId\": \"" << JsonFileManager::ParserForJson(EdgeId) << "\","
-		<< "\n\t\t\t\"PlayerDialogue\": \"" << JsonFileManager::ParserForJson(PlayerDialogue) << "\","
-		<< "\n\t\t\t\"NextNodeId\": \"" << JsonFileManager::ParserForJson(NextNodeId) << "\""
-		<< "\n\t\t}";
+		<< "\t\t{\n"
+		<< "\t\t\t\"EdgeId\": \"" << JsonFileManager::ParserForJson(EdgeId) << "\",\n"
+		<< "\t\t\t\"PlayerDialogue\": \"" << JsonFileManager::ParserForJson(PlayerDialogue) << "\",\n"
+		<< "\t\t\t\"NextNodeId\": \"" << JsonFileManager::ParserForJson(NextNodeId) << "\",\n"
+
+		<< "\t\t\t\"bIsConvinced\": " << JsonFileManager::BoolParserForJson(bIsConvinced) << ",\n"
+		<< "\t\t\t\"bIsAngered\": " << JsonFileManager::BoolParserForJson(bIsAngered) << ",\n"
+		<< "\t\t\t\"bIsAntagonistic\": " << JsonFileManager::BoolParserForJson(bIsAntagonistic) << ",\n"
+		<< "\t\t\t\"bIsVillagerKilled\": " << JsonFileManager::BoolParserForJson(bIsVillagerKilled) << "\n"
+		<< "\t\t}";
 
 	return JsonEdgeObject.str();
 }

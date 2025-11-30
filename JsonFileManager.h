@@ -23,14 +23,14 @@ public:
 	/**
 	* @brief Opens a new file and inputs the contents gathered by this tool.
 	*/
-	static void WriteTheDialogueJson();
+	static void CreateTheDialogueJsonFile();
 
 	/**
 	* @brief Will put together a string that is fully JSON formatted.
 	*
-	* @see WriteTheDialogueJson for where this gets called.
+	* @see CreateTheDialogueJsonFile for where this gets called.
 	*
-	* @return Formatted JSON string container the full amount of information gathered by this tool.
+	* @return Formatted JSON string containing the full amount of information gathered by this tool.
 	*/
 	static std::string GenerateTheFinalJsonString();
 
@@ -44,6 +44,11 @@ public:
 	* @return A string with any singular " or \ characters preceded with a backslash( \ ).
 	*/
 	static std::string ParserForJson(const std::string& inStringToParse);
+
+	/**
+	* @brief Takes a boolean and delivers the string.
+	*/
+	static std::string BoolParserForJson(const bool inBoolToParse);
 };
 
 #endif // !JSONFILEMANAGER_H
